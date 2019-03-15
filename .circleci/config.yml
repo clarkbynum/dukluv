@@ -6,7 +6,7 @@ jobs:
     steps:
       - run:
           name: Install Dependencies
-          command: apt-get update; apt-get install cmake build-essential
+          command: apt-get update; apt-get install -y cmake build-essential
       - checkout
       - run:
           name: Checkout Submodules
