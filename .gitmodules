@@ -4,5 +4,5 @@
 	path = lib/uv
 [submodule "lib/duktape"]
 	url = https://github.com/svaarala/duktape-releases.git
-	ref = refs/tags/v0.12.0
+	ref = refs/tags/v2.3.0
 	path = lib/duktape
