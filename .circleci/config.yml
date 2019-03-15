@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+    steps:
+      - run:
+          name: Install Dependencies
+          command: sudo apt-get update; sudo apt-get install cmake build-essential
+      - checkout
+      - run:
+          name: Checkout Submodules
+          command: git submodule init; git submodule update
+      - run:
+          name: Build
+          command: mkdir build; cd build; cmake ..; make
