@@ -454,7 +454,9 @@ static duk_ret_t duv_main(duk_context *ctx) {
   return 0;
 }
 
-static duk_ret_t duv_stash_argv(duk_context *ctx) {
+static duk_ret_t duv_stash_argv(duk_context *ctx, void *udata) {
+  (void) udata;
+  
   char **argv = (char **) duk_require_pointer(ctx, 0);
   int argc = (int) duk_require_int(ctx, 1);
   int i;
@@ -504,7 +506,7 @@ int main(int argc, char *argv[]) {
   // Stash argv for later access
   duk_push_pointer(ctx, (void *) argv);
   duk_push_int(ctx, argc);
-  if (duk_safe_call(ctx, duv_stash_argv, 2, 1)) {
+  if (duk_safe_call(ctx, duv_stash_argv, NULL, 2, 1)) {
     duv_dump_error(ctx, -1);
     uv_loop_close(&loop);
     duk_destroy_heap(ctx);
