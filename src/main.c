@@ -1,6 +1,9 @@
 #include "duv.h"
 #include "misc.h"
 
+#include "duk_module_duktape.h"
+#include "duk_console.h"
+
 static uv_loop_t loop;
 
 // Sync readfile using libuv APIs as an API function.
@@ -501,6 +504,8 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "Problem initiailizing duktape heap\n");
     return -1;
   }
+  duk_module_duktape_init(ctx);
+  duk_console_init(ctx, 0);
   loop.data = ctx;
 
   // Stash argv for later access
