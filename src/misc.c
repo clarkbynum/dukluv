@@ -157,51 +157,52 @@ duk_ret_t duv_cpu_info(duk_context *ctx) {
   return 1;
 }
 
-duk_ret_t duv_interface_addresses(duk_context *ctx) {
-  uv_interface_address_t* interfaces;
-  int count, i;
-  char ip[INET6_ADDRSTRLEN];
+// todo: bring this back once uv_free_interface_addresses exists for darwin
+// duk_ret_t duv_interface_addresses(duk_context *ctx) {
+//   uv_interface_address_t* interfaces;
+//   int count, i;
+//   char ip[INET6_ADDRSTRLEN];
 
-  uv_interface_addresses(&interfaces, &count);
+//   uv_interface_addresses(&interfaces, &count);
 
-  duk_push_object(ctx);
+//   duk_push_object(ctx);
 
-  for (i = 0; i < count; i++) {
+//   for (i = 0; i < count; i++) {
 
-    duk_get_prop_string(ctx, -1, interfaces[i].name);
-    if (!duk_is_object(ctx, -1)) {
-      duk_pop(ctx);
-      duk_push_array(ctx);
-      duk_dup(ctx, -1);
-      duk_put_prop_string(ctx, -3, interfaces[i].name);
-    }
+//     duk_get_prop_string(ctx, -1, interfaces[i].name);
+//     if (!duk_is_object(ctx, -1)) {
+//       duk_pop(ctx);
+//       duk_push_array(ctx);
+//       duk_dup(ctx, -1);
+//       duk_put_prop_string(ctx, -3, interfaces[i].name);
+//     }
 
-    duk_push_object(ctx);
+//     duk_push_object(ctx);
 
-    duk_push_boolean(ctx, interfaces[i].is_internal);
-    duk_put_prop_string(ctx, -2, "internal");
+//     duk_push_boolean(ctx, interfaces[i].is_internal);
+//     duk_put_prop_string(ctx, -2, "internal");
 
-    if (interfaces[i].address.address4.sin_family == AF_INET) {
-      uv_ip4_name(&interfaces[i].address.address4, ip, sizeof(ip));
-    } else if (interfaces[i].address.address4.sin_family == AF_INET6) {
-      uv_ip6_name(&interfaces[i].address.address6, ip, sizeof(ip));
-    } else {
-      strncpy(ip, "<unknown sa family>", INET6_ADDRSTRLEN);
-    }
-    duk_push_string(ctx, ip);
-    duk_put_prop_string(ctx, -2, "ip");
+//     if (interfaces[i].address.address4.sin_family == AF_INET) {
+//       uv_ip4_name(&interfaces[i].address.address4, ip, sizeof(ip));
+//     } else if (interfaces[i].address.address4.sin_family == AF_INET6) {
+//       uv_ip6_name(&interfaces[i].address.address6, ip, sizeof(ip));
+//     } else {
+//       strncpy(ip, "<unknown sa family>", INET6_ADDRSTRLEN);
+//     }
+//     duk_push_string(ctx, ip);
+//     duk_put_prop_string(ctx, -2, "ip");
 
-    duk_push_string(ctx, duv_protocol_to_string(interfaces[i].address.address4.sin_family));
-    duk_put_prop_string(ctx, -2, "family");
+//     duk_push_string(ctx, duv_protocol_to_string(interfaces[i].address.address4.sin_family));
+//     duk_put_prop_string(ctx, -2, "family");
 
-    duk_put_prop_index(ctx, -2, duk_get_length(ctx, -2));
+//     duk_put_prop_index(ctx, -2, duk_get_length(ctx, -2));
 
-    duk_pop(ctx);
-  }
+//     duk_pop(ctx);
+//   }
 
-  uv_free_interface_addresses(interfaces, count);
-  return 1;
-}
+//   uv_free_interface_addresses(interfaces, count);
+//   return 1;
+// }
 
 duk_ret_t duv_loadavg(duk_context *ctx) {
   double avg[3];

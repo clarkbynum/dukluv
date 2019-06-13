@@ -111,7 +111,7 @@ static const duk_function_list_entry duv_funcs[] = {
   {"uptime", duv_uptime, 0},
   {"getrusage", duv_getrusage, 0},
   {"cpu_info", duv_cpu_info, 0},
-  {"interface_addresses", duv_interface_addresses, 0},
+  // {"interface_addresses", duv_interface_addresses, 0},
   {"loadavg", duv_loadavg, 0},
   {"exepath", duv_exepath, 0},
   {"cwd", duv_cwd, 0},

@@ -2,5 +2,5 @@
 
 // uv.argv() returns the C argv[] array
 uv.argv().forEach(function (v, i) {
-  print('arg', i, v);
+  console.log('arg', i, v);
 });
