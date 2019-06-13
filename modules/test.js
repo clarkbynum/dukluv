@@ -21,7 +21,7 @@ function test(name, fn) {
   try {
     cwd = uv.cwd();
     var expects = [];
-    print("\nStarting test: " + colorize("highlight", name));
+    console.log("\nStarting test: " + colorize("highlight", name));
     fn(assert, function (fn, left) {
       left = left || 1;
       expects.push(fn);
@@ -50,12 +50,12 @@ function test(name, fn) {
     if (uv.cwd() !== cwd) {
       throw new Error("Test left cwd modified: " + cwd + " != " + uv.cwd());
     }
-    alert(colorize("success", "Passed!"));
+    console.log(colorize("success", "Passed!"));
   }
   catch (err) {
     exports.errors++;
-    alert(colorize("failure", "Failed!"));
-    alert(colorize("error", err.stack));
+    console.log(colorize("failure", "Failed!"));
+    console.log(colorize("error", err.stack));
   }
   finally {
     uv.chdir(cwd);
@@ -74,7 +74,7 @@ function cleanup() {
   }
   catch (err) {
     exports.errors++;
-    alert(colorize("error", err.stack));
+    console.log(colorize("error", err.stack));
     cleanup();
   }
 }
