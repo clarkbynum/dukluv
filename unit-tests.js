@@ -193,7 +193,7 @@ test("pretty printer", function () {
 
   p({
     regexp: /abc*/,
-    native: print,
+    native: console.log,
     user: function user() {},
     anonymous: function () {},
   });
@@ -203,7 +203,7 @@ test("pretty printer", function () {
   p({
     thread: new Duktape.Thread(test),
     buffer: timer,
-    dynamic: new Duktape.Buffer("Hello"),
+    // dynamic: new Duktape.Buffer("Hello"), todo: use new duktape buffer api (duktape.buffer was removed in duktape v2.0.0)
     pointer: new Duktape.Pointer(p),
     error: new Error("test"),
     typeError: new TypeError("test2"),
@@ -216,7 +216,7 @@ test("pretty printer", function () {
 
   p({
     thread: Duktape.Thread(test),
-    dynamic: Duktape.Buffer("Hello"),
+    // dynamic: Duktape.Buffer("Hello"), todo: use new duktape buffer api (duktape.buffer was removed in duktape v2.0.0)
     pointer: Duktape.Pointer(p),
     error: Error("test"),
     typeError: TypeError("test2"),

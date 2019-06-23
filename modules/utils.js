@@ -169,5 +169,5 @@ function strip(string) {
 }
 
 function prettyPrint() {
-  print(Array.prototype.map.call(arguments, dump).join(" "));
+  console.log(Array.prototype.map.call(arguments, dump).join(" "));
 }
