@@ -22,7 +22,7 @@
 //   mz_zip_archive archive;
 //   uv_loop_t *loop;
 //   uv_fs_t req;
-//   uv_file fd;
+//   uv_os_fd_t fd;
 // } lmz_file_t;
 //
 // static size_t lmz_file_read(void *pOpaque, mz_uint64 file_ofs, void *pBuf, size_t n) {

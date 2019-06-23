@@ -18,7 +18,7 @@ duk_ret_t duv_new_pipe(duk_context *ctx) {
 
 duk_ret_t duv_pipe_open(duk_context *ctx) {
   uv_pipe_t* handle;
-  uv_file file;
+  uv_os_fd_t file;
 
   dschema_check(ctx, (const duv_schema_entry[]) {
     {"pipe", duv_is_pipe},
