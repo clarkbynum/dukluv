@@ -16,7 +16,7 @@ uv.read_start(utils.stdin, function (err, chunk) {
   if (err) { throw err; }
   if (!chunk) { return uv.read_stop(utils.stdin); }
   try {
-    p(eval(chunk.toString()));
+    p(eval(new TextDecoder().decode(chunk)));
   }
   catch (error) {
     uv.write(utils.stderr, utils.colorize("error", error.toString()) + "\n");
