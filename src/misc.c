@@ -1,7 +1,7 @@
 #include "duv.h"
 
 duk_ret_t duv_guess_handle(duk_context *ctx) {
-  uv_file file;
+  uv_os_fd_t file;
 
   dschema_check(ctx, (const duv_schema_entry[]) {
     {"fd", duv_is_fd},

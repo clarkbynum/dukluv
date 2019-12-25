@@ -201,7 +201,7 @@ static void duv_fs_cb(uv_fs_t* req) {
 }
 
 duk_ret_t duv_fs_close(duk_context *ctx) {
-  uv_file file = duk_require_int(ctx, 0);
+  uv_os_fd_t file = duk_require_int(ctx, 0);
   uv_fs_t* req = duk_push_fixed_buffer(ctx, sizeof(*req));
   req->data = duv_setup_req(ctx, 1);
   FS_CALL(close, req, file);
@@ -217,7 +217,7 @@ duk_ret_t duv_fs_open(duk_context *ctx) {
 }
 
 duk_ret_t duv_fs_read(duk_context *ctx) {
-  uv_file file = duk_require_uint(ctx, 0);
+  uv_os_fd_t file = duk_require_uint(ctx, 0);
   int64_t len = duk_require_uint(ctx, 1);
   int64_t offset = duk_require_uint(ctx, 2);
   uv_buf_t buf;
@@ -238,7 +238,7 @@ duk_ret_t duv_fs_unlink(duk_context *ctx) {
 }
 
 duk_ret_t duv_fs_write(duk_context *ctx) {
-  uv_file file;
+  uv_os_fd_t file;
   uv_buf_t buf;
   int64_t offset;
   duv_req_t *data;
@@ -344,7 +344,7 @@ duk_ret_t duv_fs_stat(duk_context *ctx) {
 }
 
 duk_ret_t duv_fs_fstat(duk_context *ctx) {
-  uv_file file = duk_require_uint(ctx, 0);
+  uv_os_fd_t file = duk_require_uint(ctx, 0);
   uv_fs_t* req = duk_push_fixed_buffer(ctx, sizeof(*req));
   req->data = duv_setup_req(ctx, 1);
   FS_CALL(fstat, req, file);
@@ -366,21 +366,21 @@ duk_ret_t duv_fs_rename(duk_context *ctx) {
 }
 
 duk_ret_t duv_fs_fsync(duk_context *ctx) {
-  uv_file file = duk_require_uint(ctx, 0);
+  uv_os_fd_t file = duk_require_uint(ctx, 0);
   uv_fs_t* req = duk_push_fixed_buffer(ctx, sizeof(*req));
   req->data = duv_setup_req(ctx, 1);
   FS_CALL(fsync, req, file);
 }
 
 duk_ret_t duv_fs_fdatasync(duk_context *ctx) {
-  uv_file file = duk_require_uint(ctx, 0);
+  uv_os_fd_t file = duk_require_uint(ctx, 0);
   uv_fs_t* req = duk_push_fixed_buffer(ctx, sizeof(*req));
   req->data = duv_setup_req(ctx, 1);
   FS_CALL(fdatasync, req, file);
 }
 
 duk_ret_t duv_fs_ftruncate(duk_context *ctx) {
-  uv_file file = duk_require_uint(ctx, 0);
+  uv_os_fd_t file = duk_require_uint(ctx, 0);
   int64_t offset = duk_require_uint(ctx, 1);
   uv_fs_t* req = duk_push_fixed_buffer(ctx, sizeof(*req));
   req->data = duv_setup_req(ctx, 2);
@@ -388,8 +388,8 @@ duk_ret_t duv_fs_ftruncate(duk_context *ctx) {
 }
 
 duk_ret_t duv_fs_sendfile(duk_context *ctx) {
-  uv_file out_fd = duk_require_uint(ctx, 0);
-  uv_file in_fd = duk_require_uint(ctx, 1);
+  uv_os_fd_t out_fd = duk_require_uint(ctx, 0);
+  uv_os_fd_t in_fd = duk_require_uint(ctx, 1);
   int64_t in_offset = duk_require_uint(ctx, 2);
   size_t length = duk_require_uint(ctx, 3);
   uv_fs_t* req = duk_push_fixed_buffer(ctx, sizeof(*req));
@@ -426,7 +426,7 @@ duk_ret_t duv_fs_chmod(duk_context *ctx) {
 }
 
 duk_ret_t duv_fs_fchmod(duk_context *ctx) {
-  uv_file file = duk_require_uint(ctx, 0);
+  uv_os_fd_t file = duk_require_uint(ctx, 0);
   int mode = duk_require_uint(ctx, 1);
   uv_fs_t* req = duk_push_fixed_buffer(ctx, sizeof(*req));
   req->data = duv_setup_req(ctx, 2);
@@ -443,7 +443,7 @@ duk_ret_t duv_fs_utime(duk_context *ctx) {
 }
 
 duk_ret_t duv_fs_futime(duk_context *ctx) {
-  uv_file file = duk_require_uint(ctx, 0);
+  uv_os_fd_t file = duk_require_uint(ctx, 0);
   double atime = duk_require_number(ctx, 1);
   double mtime = duk_require_number(ctx, 2);
   uv_fs_t* req = duk_push_fixed_buffer(ctx, sizeof(*req));
@@ -495,7 +495,7 @@ duk_ret_t duv_fs_chown(duk_context *ctx) {
 }
 
 duk_ret_t duv_fs_fchown(duk_context *ctx) {
-  uv_file file = duk_require_uint(ctx, 0);
+  uv_os_fd_t file = duk_require_uint(ctx, 0);
   uv_uid_t uid = duk_require_uint(ctx, 1);
   uv_uid_t gid = duk_require_uint(ctx, 2);
   uv_fs_t* req = duk_push_fixed_buffer(ctx, sizeof(*req));
