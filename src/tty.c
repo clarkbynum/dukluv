@@ -2,7 +2,7 @@
 
 duk_ret_t duv_new_tty(duk_context *ctx) {
   uv_tty_t* handle;
-  uv_file fd;
+  uv_os_fd_t fd;
   duk_bool_t readable;
 
   dschema_check(ctx, (const duv_schema_entry[]) {
